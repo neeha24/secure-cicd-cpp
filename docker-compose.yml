@@ -1,0 +1,25 @@
+# OPTIONAL: spin up SonarQube Community Edition locally.
+#
+#   docker compose up -d
+#   # then open http://localhost:9000  (default login admin/admin)
+#
+# Note: SonarQube Community Edition does NOT analyse C/C++ (that needs a paid
+# edition). So in the demo, point SonarQube at the Python utility in scripts/,
+# and use cppcheck for the C++ code. Be ready to say exactly that in the
+# interview -- knowing this licensing boundary is itself a strong signal.
+services:
+  sonarqube:
+    image: sonarqube:community
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    volumes:
+      - sonar_data:/opt/sonarqube/data
+      - sonar_logs:/opt/sonarqube/logs
+      - sonar_extensions:/opt/sonarqube/extensions
+
+volumes:
+  sonar_data:
+  sonar_logs:
+  sonar_extensions:
