@@ -161,13 +161,4 @@ you swap the tool, not the workflow. Be ready to say exactly this:
 
 ---
 
-## Honest notes (so you're never caught out)
 
-- **SonarQube Community Edition does not analyse C/C++.** Use it on the Python
-  script; use cppcheck for the C++. Knowing this boundary is a plus, not a gap.
-- This is a **demo**, not production. In production you'd add: signed commits,
-  pinned/locked dependencies, Artifactory for artifacts, hardware-in-the-loop
-  test stages for embedded targets, and policy-as-code for the gate.
-- The `examples/leaked_config.env.example` file is an **intentional** fake
-  secret (AWS's own published example key) so the secrets scanner finds
-  something to report.
