@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Talisman Security Report</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 30px; background: #f4f4f4; }
+  h1 { color: #333; }
+  .summary { display: flex; gap: 20px; margin-bottom: 30px; }
+  .card { background: white; border-radius: 8px; padding: 20px; min-width: 150px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .card .number { font-size: 2em; font-weight: bold; }
+  .card .label { color: #666; font-size: 0.9em; }
+  .red { color: #e74c3c; }
+  .orange { color: #e67e22; }
+  .green { color: #27ae60; }
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  th { background: #2c3e50; color: white; padding: 12px 15px; text-align: left; }
+  td { padding: 11px 15px; border-bottom: 1px solid #eee; font-size: 0.9em; }
+  tr:hover { background: #f9f9f9; }
+  .HIGH { background: #fdecea; color: #c0392b; font-weight: bold; padding: 3px 8px; border-radius: 4px; }
+  .LOW { background: #fff8e1; color: #e67e22; font-weight: bold; padding: 3px 8px; border-radius: 4px; }
+  .filename { font-family: monospace; font-size: 0.85em; color: #2980b9; }
+</style>
+</head>
+<body>
+
+<h1>Talisman Security Scan Report</h1>
+<p>Project: <strong>secure-cicd-cpp</strong></p>
+
+<div class="summary">
+  <div class="card"><div class="number red">3</div><div class="label">HIGH</div></div>
+  <div class="card"><div class="number orange">20</div><div class="label">LOW</div></div>
+  <div class="card"><div class="number">23</div><div class="label">Total Findings</div></div>
+  <div class="card"><div class="number">6</div><div class="label">Files Flagged</div></div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>File</th>
+      <th>Severity</th>
+      <th>Type</th>
+      <th>Finding</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td class="filename">examples/leaked_config.env.example</td>
+      <td><span class="HIGH">HIGH</span></td>
+      <td>filecontent</td>
+      <td>Base64 encoded secret: AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPx...</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td class="filename">examples/leaked_config.env.example</td>
+      <td><span class="HIGH">HIGH</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: AWS_ACCESS_KEY_ID=</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td class="filename">examples/leaked_config.env.example</td>
+      <td><span class="HIGH">HIGH</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: AWS_SECRET_ACCESS_KEY=</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td class="filename">examples/leaked_config.env.example</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filename</td>
+      <td>Filename matches .env pattern</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td class="filename">examples/leaked_config.env.example</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td class="filename">examples/leaked_config.env.example</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td class="filename">Jenkinsfile</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: docker run --rm -v "$PWD:/repo"</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td class="filename">Jenkinsfile</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: -v "$PWD/reports:/reports"</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td class="filename">scripts/security_report.py</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: secrets = count_gitleaks(...)</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td class="filename">scripts/security_report.py</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: print(f"\n[SECRETS] gitleaks findings...")</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td class="filename">scripts/security_report.py</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: if secrets > THRESHOLDS["secrets"]</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td class="filename">README.md</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: -v "$PWD/reports:/reports" anchore/syft</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td class="filename">README.md</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: -v "$PWD/reports:/reports" aquasec/trivy</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td class="filename">README.md</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td class="filename">README.md</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: Secrets scanning | gitleaks | GitGuardian</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td class="filename">INTERVIEW_GUIDE.md</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: Show the gate failing: point at the fake secret</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td class="filename">INTERVIEW_GUIDE.md</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filecontent</td>
+      <td>Potential secret pattern: scan for secrets, and ideally use a trusted proxy</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td class="filename">.pvenv/pyvenv.cfg</td>
+      <td><span class="LOW">LOW</span></td>
+      <td>filename</td>
+      <td>Filename matches .env pattern</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<p style="color:#888; font-size:0.85em;">Generated by Talisman 1.37.0 &nbsp;|&nbsp; Rows 1–3 are real findings. Rows 4–18 are false positives (docs, variable names, filenames).</p>
+</body>
+</html>

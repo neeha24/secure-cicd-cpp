@@ -4,3 +4,6 @@ reports/
 *.obj
 .DS_Store
 .pvenv/
+INTERVIEW_GUIDE.md
+.dockerignore
+
