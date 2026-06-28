@@ -1,0 +1,5 @@
+build/
+reports/
+.pvenv/
+.git/
+.DS_Store

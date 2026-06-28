@@ -5,6 +5,5 @@ reports/
 .DS_Store
 .pvenv/
 INTERVIEW_GUIDE.md
-.dockerignore
 
 talisman_report/
